@@ -10,6 +10,7 @@ Element providing solution to no problem in particular.
 @element daum-map
 @blurb Web Component for Daum Map API
 @status alpha
+@version 1.2.3
 @homepage http://ragingwind.github.io/daum-map
 -->
 <polymer-element name="daum-map" attributes="apikey width height level">
@@ -82,12 +83,6 @@ Element providing solution to no problem in particular.
        *   @param {Object} event.detail.point. A point of click
        */
 
-      /**
-       * The `fireMapClick` method will fire the click event when
-       * user click on the map
-       *
-       * @method fireMapClick
-       */
       fireMapClick: function(e) {
         this.fire('map-click', e);
       },
