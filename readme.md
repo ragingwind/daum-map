@@ -1,7 +1,7 @@
 daum-map
 ================
 
-**WARNING** This is not an official Web Components for daum map . It was made for Polymer tutorials for codelab
+**WARNING** This is not an official Web Components for daum map. It was made as Polymer tutorials for codelab.
 
 See the [component page](http://ragingwind.github.io/daum-map) for more information.
 
