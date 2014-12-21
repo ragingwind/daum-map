@@ -1,0 +1,19 @@
+{
+  "name": "daum-map",
+  "version": "0.0.0",
+  "keywords": [
+    "seed",
+    "polymer",
+    "web-components"
+  ],
+  "main": "daum-map.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.1",
+    "paper-input": "Polymer/paper-input#~0.5.2",
+    "paper-button": "Polymer/paper-button#~0.5.2",
+    "paper-slider": "Polymer/paper-slider#~0.5.2"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^2.0.0"
+  }
+}
