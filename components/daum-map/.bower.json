@@ -1,0 +1,27 @@
+{
+  "name": "daum-map",
+  "keywords": [
+    "seed",
+    "polymer",
+    "web-components"
+  ],
+  "main": "daum-map.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.1",
+    "paper-slider": "Polymer/paper-slider#~0.5.2"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^2.0.0"
+  },
+  "homepage": "https://github.com/ragingwind/daum-map",
+  "_release": "07d9e1a6fa",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "07d9e1a6faa82c13e89004c3269c2ec2fbccdd40"
+  },
+  "_source": "git://github.com/ragingwind/daum-map.git",
+  "_target": "master",
+  "_originalSource": "ragingwind/daum-map",
+  "_direct": true
+}

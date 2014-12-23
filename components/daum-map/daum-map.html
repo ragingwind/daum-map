@@ -1,0 +1,155 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+Element providing solution to no problem in particular.
+
+##### Example
+
+    <daum-map width="400px" height="400px" apikey="SET-YOUR-DAUM-API-KEY"></daum-map>
+
+@element daum-map
+@blurb Web Component for Daum Map API
+@status alpha
+@version 1.2.3
+@homepage http://ragingwind.github.io/daum-map
+-->
+<polymer-element name="daum-map" attributes="apikey width height level">
+
+  <template>
+    <link rel="stylesheet" href="daum-map.css" />
+    <div id="map"></div>
+  </template>
+
+  <script>
+    Polymer({
+      /**
+       * The `apikey` attribute sets an apikey for fetching and using library
+       *
+       * @attribute apikey
+       * @type string
+       */
+      apikey: '',
+
+      // Instance for daum map
+      map: undefined,
+
+      /**
+       * The `latitude` attribute sets a latitude of a map
+       *
+       * @attribute latitude
+       * @type float
+       */
+      latitude: 33.450701,
+
+      /**
+       * The `longitude` attribute sets a longitude of a map
+       *
+       * @attribute longitude
+       * @type float
+       */
+      longitude: 126.570667,
+
+      /**
+       * The `width` attribute sets a width of map element
+       *
+       * @attribute width
+       * @type integer
+       */
+      width: 0,
+
+      /**
+       * The `height` attribute sets a height of map element
+       *
+       * @attribute height
+       * @type integer
+       */
+      height: 0,
+
+      /**
+       * The `level` attribute sets a level of a map
+       *
+       * @attribute level
+       * @type integer
+       */
+      level: 3,
+
+      /**
+       * The `map-click` event is fired whenever we
+       * call fireLasers.
+       *
+       * @event map-click
+       * @param {Object} event
+       *   @param {Object} event.detail.latLng. A Lat, Lng of point
+       *   @param {Object} event.detail.point. A point of click
+       */
+
+      fireMapClick: function(e) {
+        this.fire('map-click', e);
+      },
+
+      // Run when latitude has been changed
+      latitudeChanged: function(oldLatitude, newLatitude) {
+        var center = this.map.getCenter();
+        this.map.setCenter(new daum.maps.LatLng(newLatitude, center.getLng()));
+      },
+
+      // Run when longitude has been changed
+      longitudeChanged: function(oldLongitude, newLongitude) {
+        var center = this.map.getCenter();
+        this.map.setCenter(new daum.maps.LatLng(center.getLat(), newLongitude));
+      },
+
+      // Run when level has been changed
+      levelChanged: function(oldLevel, newLevel) {
+        this.map && this.map.setLevel(newLevel);
+      },
+
+      // Run when width has been changed
+      widthChanged: function(oldWidth, newWidth) {
+        this.$.map.style.width = this.pixelize(newWidth);
+        this.map && this.map.relayout();
+      },
+
+      // Run when height has been changed
+      heightChanged: function(oldHeight, newHeight) {
+        this.$.map.style.height = this.pixelize(newHeight);
+        this.map && this.map.relayout();
+      },
+
+      // Make a width with 'px'
+      pixelize: function(s) {
+        return s + (!/px^/.test(s) ? 'px' : '');
+      },
+
+      // Util for appending script
+      appendScript: function(src, onload) {
+        var script = document.createElement('script');
+        script.src = src;
+        script.onload = onload.bind(this);
+        document.head.appendChild(script);
+      },
+
+      // Ready to use elements in custom elements
+      ready: function() {
+        var _this = this;
+
+        this.appendScript('//apis.daum.net/maps/maps3.js?autoload=false&apikey=' + this.apikey, function() {
+          daum.maps.load(function() {
+            // Create a new daum map
+            _this.map = new daum.maps.Map(_this.$.map, {
+              center: new daum.maps.LatLng(_this.latitude, _this.longitude),
+              level: _this.level
+            });
+
+            // Add handler for click event
+            daum.maps.event.addListener(_this.map, 'click', function(e) {
+              _this.fireMapClick(e);
+            });
+          });
+        });
+      }
+    });
+
+  </script>
+
+</polymer-element>
